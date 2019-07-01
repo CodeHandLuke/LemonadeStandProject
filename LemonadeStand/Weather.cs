@@ -9,6 +9,11 @@ namespace LemonadeStand
     public class Weather
     {
         //member variables
+        public string weatherForecast;
+        public int highTemp;
+        Random rng;
+        
+
 
 
         //constructors

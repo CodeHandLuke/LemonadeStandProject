@@ -9,6 +9,8 @@ namespace LemonadeStand
     public class Day
     {
         //member variables
+        public int currentDay;
+        public int gameLength;
 
 
         //constructors
