@@ -15,11 +15,12 @@ namespace LemonadeStand
         //constructors
         public Human (Inventory inventory) : base(inventory)
         {
+            //This constructor was created to pass in the inventory values from the Inventory Class
         }
 
 
         //methods
-        public override void PurchaseInventory()
+        public override void PurchaseInventory()//possibly create a money class to round the totalMoney
         {
             if (totalMoney > 0)
             {
