@@ -9,24 +9,27 @@ namespace LemonadeStand
     public abstract class Player
     {
         //member variables
-        public string playerName;
+        public string name;
         public double totalMoney;
         public double netGains;
         public double netProfit;
         public double netLoss;
         public Inventory inventory;
+        public Recipe recipe;
 
 
 
 
         //constructors
-        public Player(Inventory inventory)
+        public Player(Inventory inventory, Recipe recipe)
         {
             totalMoney = 20;
             netGains = 0;
             netProfit = 0;
             netLoss = 0;
             this.inventory = inventory;
+            this.recipe = recipe;
+
         }
 
 
@@ -34,7 +37,7 @@ namespace LemonadeStand
         public void InputName() //This method serves to have the players (human) input their own name
         {
             Console.WriteLine("Please enter a name for Player");
-            playerName = Console.ReadLine();
+            name = Console.ReadLine();
         }
 
         public abstract void PurchaseInventory(); //This will serve as the function to prompt the player to purchase their daily inventory

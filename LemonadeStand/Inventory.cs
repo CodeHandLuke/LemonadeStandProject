@@ -23,10 +23,10 @@ namespace LemonadeStand
         //constructors
         public Inventory()
         {
-            this.paperCups = 0;
-            this.lemons = 0;
-            this.sugarCups = 0;
-            this.iceCubes = 0;
+            paperCups = 0;
+            lemons = 0;
+            sugarCups = 0;
+            iceCubes = 0;
         }
 
 

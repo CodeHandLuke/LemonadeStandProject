@@ -27,7 +27,7 @@ namespace LemonadeStand
             Random newForecast = new Random();
             int forecast = newForecast.Next(0, forecastArray.Length);
             weatherForecast = forecastArray[forecast];
-            Console.WriteLine(weatherForecast);
+            Console.WriteLine($"Today's weather forecast is: {weatherForecast}");
         }
 
         public void GetTemperature()
@@ -35,7 +35,7 @@ namespace LemonadeStand
             Random newTemp = new Random();
             int temperature = newTemp.Next(50, 101);
             highTemp = temperature;
-            Console.WriteLine(highTemp);
+            Console.WriteLine($"Today's high temperature is: {highTemp}");
         }
 
         public void GetDailyWeather()

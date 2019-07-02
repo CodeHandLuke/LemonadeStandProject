@@ -29,80 +29,72 @@ namespace LemonadeStand
         {
             Console.WriteLine($"You can choose 7, 14, or 21 days to run your lemonade stand and sell your lemonade. At the end, your net gains will be calculated to see if you made a profit or a loss.\n\nAt the beginning of each day, you will buy cups, lemons, sugar, and ice cubes, then you will have to determine the quantities of each ingredient you want in your recipe.\n\nThere will be a daily weather forecast which you should use to determine how you set your recipe and price per cup.\n\nYou can experiment with the price and recipe as they relate to the weather, for better results. Press enter to continue...\n");
             Console.ReadLine();
+            Console.Clear();
             InitializeGame();
         }
 
-        public int ChooseGameType()
+        public string ValidateGameChoice()
         {
-            bool chooseGameType = false;
-            while (!chooseGameType)
+            bool isInputValid = false;
+            string gameChoice = "";
+            while (!isInputValid)
             {
                 Console.WriteLine("Choose whether you want to play for 7, 14, or 21 days by typing in the '7', '14', or '21'...");
-                gameLength = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("\n");
-                switch (gameLength)
+                gameChoice = Console.ReadLine();
+                switch (gameChoice)
                 {
-                    case 7:
-                        chooseGameType = true;
-                        return gameLength;
-                    case 14:
-                        chooseGameType = true;
-                        return gameLength;
-                    case 21:
-                        chooseGameType = true;
-                        return gameLength;
+                    case "7":
+                        isInputValid = true;
+                        return gameChoice;
+                    case "14":
+                        isInputValid = true;
+                        return gameChoice;
+                    case "21":
+                        isInputValid = true;
+                        return gameChoice;
                     default:
                         Console.WriteLine("Invalid Input, Try again.");
                         break;
                 }
             }
-            return gameLength;
+            return gameChoice;
         }
 
         public void InitializeGame()
         {
-            int result = ChooseGameType();
+            int result = Convert.ToInt32(ValidateGameChoice());
             if (result == 7)
             {
                 Console.WriteLine("You chose to play for 7 days");
                 Inventory inventory1 = new Inventory();
-                player1 = new Human(inventory1);
+                Recipe recipe1 = new Recipe();
+                player1 = new Human(inventory1, recipe1);
                 player1.InputName();
-                Console.WriteLine("\n");
-                StartGame();
+                Console.Clear();
+                PromptPlayerPurchase();
             }
 
             else if (result == 14)
             {
                 Console.WriteLine("You chose to play for 14 days");
                 Inventory inventory1 = new Inventory();
-                player1 = new Human(inventory1);
+                Recipe recipe1 = new Recipe();
+                player1 = new Human(inventory1, recipe1);
                 player1.InputName();
-                Console.WriteLine("\n");
+                Console.Clear();
+                PromptPlayerPurchase();
             }
 
             else
             {
                 Console.WriteLine("You chose to play for 21 days");
                 Inventory inventory1 = new Inventory();
-                player1 = new Human(inventory1);
+                Recipe recipe1 = new Recipe();
+                player1 = new Human(inventory1, recipe1);
                 player1.InputName();
-                Console.WriteLine("\n");
+                Console.Clear();
+                PromptPlayerPurchase();
             }
-        }
-
-        public void StartGame()
-        {
-            ShowInventory();
-        }
-
-        public void ShowInventory()//This is just a display of the player's inventory, from here I want to prompt the player to possibly purchase more.
-        {
-            Console.WriteLine($"Inventory:\nPlayer Funds: ${player1.totalMoney}\nPaper Cups: {player1.inventory.paperCups}\nLemons: {player1.inventory.lemons}\nCups of Sugar: {player1.inventory.sugarCups}\nIce Cubes: {player1.inventory.iceCubes}\n\nHere you can use your funds to purchase more ingredients or cups to make lemonade.\n\n");
-            Console.WriteLine("Press continue to choose how you want to restock your inventory...");
-            Console.ReadLine();
-            PromptPlayerPurchase();
-            Console.Clear();
         }
 
         public void DisplayPlayerFunds()
@@ -115,14 +107,13 @@ namespace LemonadeStand
             if (player1.totalMoney > 0)
             {
                 player1.PurchaseInventory();
-                ShowInventory();
             }
 
             else
             {
-                Console.WriteLine("Unfortunately you do not have enough money to buy more inventory, please proceed to open your lemonade stand and see if you can make more money!");
+                Console.WriteLine("Unfortunately you do not have enough money to buy more inventory, please proceed to set your recipe.");
                 Console.ReadLine();
-                //add the method to start the game loop
+                player1.SetRecipe();
             }
             
         }
