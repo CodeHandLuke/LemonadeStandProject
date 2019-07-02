@@ -37,12 +37,12 @@ namespace LemonadeStand
 
                 else if (result == 3)
                 {
-                    //purchase cups of sugar
+                    PurchaseSugarCups();
                 }
 
                 else if (result == 4)
                 {
-                    //purchase ice cubes
+                    PurchaseIceCubes();
                 }
 
                 else if (result == 5)
@@ -53,6 +53,7 @@ namespace LemonadeStand
 
             else
             {
+                Console.WriteLine($"You don't have enough funds to purchase any items: ${totalMoney}.");
                 //start lemonade game
             }
 
@@ -95,10 +96,28 @@ namespace LemonadeStand
         {
             Console.WriteLine("Type in the amount of paper cups you want to purchase:");
             string multiplier = Console.ReadLine();
+            double totalItemCost;
             if (int.TryParse(multiplier, out int result))
             {
-                inventory.paperCups += result;
-                totalMoney -= result * inventory.paperCupCost;
+                if (totalMoney >= 0)
+                {
+                    totalItemCost = result * inventory.paperCupCost;
+                    if (totalMoney >= totalItemCost)
+                    {
+                        inventory.paperCups += result;
+                        totalMoney -= result * inventory.paperCupCost;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${totalMoney} remaining.");
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${totalMoney}.");
+                }
+
             }
 
             else
@@ -111,12 +130,30 @@ namespace LemonadeStand
 
         public void PurchaseLemons()
         {
-            Console.WriteLine("Type in the amount of lemons cups you want to purchase:");
+            Console.WriteLine("Type in the amount of lemons you want to purchase:");
             string multiplier = Console.ReadLine();
+            double totalItemCost;
             if (int.TryParse(multiplier, out int result))
             {
-                inventory.lemons += result;
-                totalMoney -= result * inventory.lemonCost;
+                if (totalMoney >= 0)
+                {
+                    totalItemCost = result * inventory.lemonCost;
+                    if (totalMoney >= totalItemCost)
+                    {
+                        inventory.lemons += result;
+                        totalMoney -= result * inventory.lemonCost;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${totalMoney}.");
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${totalMoney}.");
+                }
+                
             }
 
             else
@@ -125,6 +162,76 @@ namespace LemonadeStand
                 ChooseRestockChoice();
             }
 
+        }
+
+        public void PurchaseSugarCups()
+        {
+            Console.WriteLine("Type in the amount of cups of sugar you want to purchase:");
+            string multiplier = Console.ReadLine();
+            double totalItemCost;
+            if (int.TryParse(multiplier, out int result))
+            {
+                if (totalMoney >= 0)
+                {
+                    totalItemCost = result * inventory.sugarCupsCost;
+                    if (totalMoney >= totalItemCost)
+                    {
+                        inventory.sugarCups += result;
+                        totalMoney -= result * inventory.sugarCupsCost;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${totalMoney} remaining.");
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${totalMoney}.");
+                }
+
+            }
+
+            else
+            {
+                Console.WriteLine("Not a valid incorrect, please try again");
+                ChooseRestockChoice();
+            }
+        }
+
+        public void PurchaseIceCubes()
+        {
+            Console.WriteLine("Type in the amount of ice cubes you want to purchase:");
+            string multiplier = Console.ReadLine();
+            double totalItemCost;
+            if (int.TryParse(multiplier, out int result))
+            {
+                if (totalMoney >= 0)
+                {
+                    totalItemCost = result * inventory.iceCubesCost;
+                    if (totalMoney >= totalItemCost)
+                    {
+                        inventory.iceCubes += result;
+                        totalMoney -= result * inventory.iceCubesCost;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${totalMoney} remaining.");
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${totalMoney}.");
+                }
+
+            }
+
+            else
+            {
+                Console.WriteLine("Not a valid incorrect, please try again");
+                ChooseRestockChoice();
+            }
         }
 
         public override void SetPrice()

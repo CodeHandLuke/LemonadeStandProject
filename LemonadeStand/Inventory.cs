@@ -15,6 +15,8 @@ namespace LemonadeStand
         public int iceCubes;
         public double paperCupCost = .0368;
         public double lemonCost = .097;
+        public double sugarCupsCost = .0725;
+        public double iceCubesCost = .0092;
 
 
 
