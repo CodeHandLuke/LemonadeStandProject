@@ -11,7 +11,6 @@ namespace LemonadeStand
         //member variables
         public string weatherForecast;
         public int highTemp;
-        Random rng;
         
 
 
@@ -20,5 +19,20 @@ namespace LemonadeStand
 
 
         //member methods
+        public void GetWeatherForecast()
+        {
+            //random from 0,5
+        }
+
+        public void GetTemperature()
+        {
+            //get temp between 50-100
+        }
+
+        public void GetDailyForecast()
+        {
+            GetWeatherForecast();
+            GetTemperature();
+        }
     }
 }

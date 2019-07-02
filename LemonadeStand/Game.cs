@@ -23,14 +23,13 @@ namespace LemonadeStand
             Console.WriteLine($"Welcome to the Lemonade Stand game! You are an entrepreneur that will start with $20 to setup a lemonade stand to sell as much lemonade as possible.");
             Console.ReadLine();
             DisplayRules();
-            InitializeGame();
-
         }
 
         public void DisplayRules()
         {
             Console.WriteLine($"You can choose 7, 14, or 21 days to run your lemonade stand and sell your lemonade. At the end, your net gains will be calculated to see if you made a profit or a loss.\n\nAt the beginning of each day, you will buy cups, lemons, sugar, and ice cubes, then you will have to determine the quantities of each ingredient you want in your recipe.\n\nThere will be a daily weather forecast which you should use to determine how you set your recipe and price per cup.\n\nYou can experiment with the price and recipe as they relate to the weather, for better results. Press enter to continue...\n");
             Console.ReadLine();
+            InitializeGame();
         }
 
         public int ChooseGameType()
@@ -76,7 +75,8 @@ namespace LemonadeStand
             else if (result == 14)
             {
                 Console.WriteLine("You chose to play for 14 days");
-                player1 = new Human();
+                Inventory inventory1 = new Inventory();
+                player1 = new Human(inventory1);
                 player1.InputName();
                 Console.WriteLine("\n");
             }
@@ -84,7 +84,8 @@ namespace LemonadeStand
             else
             {
                 Console.WriteLine("You chose to play for 21 days");
-                player1 = new Human();
+                Inventory inventory1 = new Inventory();
+                player1 = new Human(inventory1);
                 player1.InputName();
                 Console.WriteLine("\n");
             }
@@ -97,8 +98,7 @@ namespace LemonadeStand
 
         public void ShowInventory()//This is just a display of the player's inventory, from here I want to prompt the player to possibly purchase more.
         {
-            Inventory newInventory = new Inventory();
-            Console.WriteLine($"Inventory:\nPlayer Funds: ${player1.totalMoney}\nPaper Cups: {newInventory.paperCups}\nLemons: {newInventory.lemons}\nCups of Sugar: {newInventory.sugarCups}\nIce Cubes: {newInventory.iceCubes}\n\nHere you can use your funds to purchase more ingredients or cups to make lemonade.\n\n");
+            Console.WriteLine($"Inventory:\nPlayer Funds: ${player1.totalMoney}\nPaper Cups: {player1.inventory.paperCups}\nLemons: {player1.inventory.lemons}\nCups of Sugar: {player1.inventory.sugarCups}\nIce Cubes: {player1.inventory.iceCubes}\n\nHere you can use your funds to purchase more ingredients or cups to make lemonade.\n\n");
             Console.WriteLine("Press continue to choose how you want to restock your inventory...");
             Console.ReadLine();
             PromptPlayerPurchase();

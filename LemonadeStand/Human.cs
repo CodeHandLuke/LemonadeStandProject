@@ -21,36 +21,49 @@ namespace LemonadeStand
         //methods
         public override void PurchaseInventory()
         {
-            Console.WriteLine($"You can choose which item you want to restock by typing in the corresponding number\n1: Paper cups\n2: Lemons\n3: Cups of sugar\n4: Ice cubes\n");
-            int result = ChooseRestockChoice();
-            if (result == 1)
+            if (totalMoney > 0)
             {
-                //purchase paper cups
+                Console.WriteLine($"You can choose which item you want to restock or whether to start the game by typing in the corresponding number\n1: Paper cups\n2: Lemons\n3: Cups of sugar\n4: Ice cubes\n5: Start the game and run your lemonade stand!");
+                int result = ChooseRestockChoice();
+                if (result == 1)
+                {
+                    PurchasePaperCups();
+                }
+
+                else if (result == 2)
+                {
+                    PurchaseLemons();
+                }
+
+                else if (result == 3)
+                {
+                    //purchase cups of sugar
+                }
+
+                else if (result == 4)
+                {
+                    //purchase ice cubes
+                }
+
+                else if (result == 5)
+                {
+                    //start game
+                }
             }
 
-            else if (result == 2)
+            else
             {
-                //purchase lemons
+                //start lemonade game
             }
 
-            else if (result == 3)
-            {
-                //purchase cups of sugar
-            }
-
-            else if (result == 4)
-            {
-                //purchase ice cubes
-            }
         }
 
-        public int ChooseRestockChoice()//Don't forget to add a bulk discount
+        public int ChooseRestockChoice()
         {
             bool chosenRestockChoice = false;
             int restockChoice = 0;
             while (!chosenRestockChoice)
             {
-                Console.WriteLine("Choose whether you want to play for 7, 14, or 21 days by typing in the '7', '14', or '21'...");
                 restockChoice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("\n");
                 switch (restockChoice)
@@ -67,6 +80,9 @@ namespace LemonadeStand
                     case 4:
                         chosenRestockChoice = true;
                         return restockChoice;
+                    case 5:
+                        chosenRestockChoice = true;
+                        return restockChoice;
                     default:
                         Console.WriteLine("Invalid Input, Try again.");
                         break;
@@ -77,12 +93,30 @@ namespace LemonadeStand
 
         public void PurchasePaperCups()
         {
-            Console.WriteLine("Type in the amount of paper cups you want to purchase. The more you purchase, the cheaper the overall cost of items\nType in the number of paper cups you want to buy:");
+            Console.WriteLine("Type in the amount of paper cups you want to purchase:");
             string multiplier = Console.ReadLine();
             if (int.TryParse(multiplier, out int result))
             {
                 inventory.paperCups += result;
                 totalMoney -= result * inventory.paperCupCost;
+            }
+
+            else
+            {
+                Console.WriteLine("Not a valid incorrect, please try again");
+                ChooseRestockChoice();
+            }
+
+        }
+
+        public void PurchaseLemons()
+        {
+            Console.WriteLine("Type in the amount of lemons cups you want to purchase:");
+            string multiplier = Console.ReadLine();
+            if (int.TryParse(multiplier, out int result))
+            {
+                inventory.lemons += result;
+                totalMoney -= result * inventory.lemonCost;
             }
 
             else

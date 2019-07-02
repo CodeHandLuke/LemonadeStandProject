@@ -54,6 +54,7 @@
     <Compile Include="Store.cs" />
     <Compile Include="UserInterface.cs" />
     <Compile Include="Weather.cs" />
+    <Compile Include="WeatherTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
