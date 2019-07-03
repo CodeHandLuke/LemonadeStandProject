@@ -9,7 +9,7 @@ namespace LemonadeStand
     public class Game
     {
         //member variables
-        Player player1;
+        public Player player1;
         public int gameLength;
 
 
@@ -33,94 +33,54 @@ namespace LemonadeStand
             InitializeGame();
         }
 
-        public string ValidateGameChoice()
-        {
-            bool isInputValid = false;
-            string gameChoice = "";
-            while (!isInputValid)
-            {
-                Console.WriteLine("Choose whether you want to play for 7, 14, or 21 days by typing in the '7', '14', or '21'...");
-                gameChoice = Console.ReadLine();
-                switch (gameChoice)
-                {
-                    case "7":
-                        isInputValid = true;
-                        Console.Clear();
-                        return gameChoice;
-                    case "14":
-                        isInputValid = true;
-                        Console.Clear();
-                        return gameChoice;
-                    case "21":
-                        isInputValid = true;
-                        Console.Clear();
-                        return gameChoice;
-                    default:
-                        Console.WriteLine("Invalid Input, Try again.");
-                        Console.ReadLine();
-                        Console.Clear();
-                        break;
-                }
-            }
-            return gameChoice;
-        }
+       
 
         public void InitializeGame()
         {
-            int result = Convert.ToInt32(ValidateGameChoice());
+            int result = Convert.ToInt32(UserInterface.ValidateGameChoice());
             if (result == 7)
             {
+                gameLength = result;
                 Console.WriteLine("You chose to play for 7 days\n");
                 Inventory inventory1 = new Inventory();
                 Recipe recipe1 = new Recipe();
-                player1 = new Human(inventory1, recipe1);
+                Day newDay = new Day();
+                player1 = new Player(inventory1, recipe1);
                 player1.InputName();
                 Console.Clear();
-                PromptPlayerPurchase();
+                newDay.BeginDay(player1, gameLength);
             }
 
             else if (result == 14)
             {
+                gameLength = result;
                 Console.WriteLine("You chose to play for 14 days\n");
                 Inventory inventory1 = new Inventory();
                 Recipe recipe1 = new Recipe();
-                player1 = new Human(inventory1, recipe1);
+                Day newDay = new Day();
+                player1 = new Player(inventory1, recipe1);
                 player1.InputName();
                 Console.Clear();
-                PromptPlayerPurchase();
+                newDay.BeginDay(player1, gameLength);
             }
 
             else
             {
+                gameLength = result;
                 Console.WriteLine("You chose to play for 21 days\n");
                 Inventory inventory1 = new Inventory();
                 Recipe recipe1 = new Recipe();
-                player1 = new Human(inventory1, recipe1);
+                Day newDay = new Day();
+                player1 = new Player(inventory1, recipe1);
                 player1.InputName();
                 Console.Clear();
-                PromptPlayerPurchase();
+                newDay.BeginDay(player1, gameLength);
             }
         }
 
         public void DisplayPlayerFunds()
         {
             Console.WriteLine($"\nPlayer Funds: ${player1.totalMoney}\n");
-        }
-
-        public void PromptPlayerPurchase()
-        {
-            if (player1.totalMoney > 0)
-            {
-                player1.PurchaseInventory();
-            }
-
-            else
-            {
-                Console.WriteLine("Unfortunately you do not have enough money to buy more inventory, please proceed to set your recipe.");
-                Console.ReadLine();
-                player1.SetRecipe();
-            }
-            
         }
     }
 }

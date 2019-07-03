@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    public abstract class Player
+    public class Player
     {
         //member variables
         public string name;
@@ -40,10 +40,10 @@ namespace LemonadeStand
             name = Console.ReadLine();
         }
 
-        public abstract void PurchaseInventory(); //This will serve as the function to prompt the player to purchase their daily inventory
+        //public virtual void PurchaseInventory(); //This will serve as the function to prompt the player to purchase their daily inventory
 
-        public abstract void SetPrice(); //This method will have the player set the price per cup of lemonade
+        //public virtual void SetPrice(); //This method will have the player set the price per cup of lemonade
 
-        public abstract void SetRecipe(); //This method will have the player set the amount of each item to use in the recipe
+        //public virtual void SetRecipe(); //This method will have the player set the amount of each item to use in the recipe
     }
 }

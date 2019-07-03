@@ -22,27 +22,26 @@ namespace LemonadeStand
 
 
         //member methods
-        public void GetWeatherForecast()
+        public string GetWeatherForecast()
         {
             Random newForecast = new Random();
             int forecast = newForecast.Next(0, forecastArray.Length);
             weatherForecast = forecastArray[forecast];
-            Console.WriteLine($"Today's weather forecast is: {weatherForecast}");
+            return weatherForecast;
         }
 
-        public void GetTemperature()
+        public int GetTemperature()
         {
             Random newTemp = new Random();
             int temperature = newTemp.Next(50, 101);
             highTemp = temperature;
-            Console.WriteLine($"Today's high temperature is: {highTemp}");
+            return highTemp;
         }
 
         public void GetDailyWeather()
         {
             GetWeatherForecast();
             GetTemperature();
-            Console.ReadLine();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace LemonadeStand
     public class BaseCustomer
     {
         //member variables
+        //Customer will have these variables: name; thirstLevel; frugal (bool);
 
 
         //constructors
