@@ -20,7 +20,7 @@ namespace LemonadeStand
         public void PlayGame()
         {
             //InitializeGame will show the rules and have the player choose whether they want to play for 7, 14, or 21 days.
-            Console.WriteLine($"Welcome to the Lemonade Stand game! You are an entrepreneur that will start with $20 to setup a lemonade stand to sell as much lemonade as possible.");
+            Console.WriteLine($"Welcome to the Lemonade Stand game! You are an entrepreneur that will start with $20 to setup a lemonade stand to sell as much lemonade as possible in a specified timeframe.");
             Console.ReadLine();
             DisplayRules();
         }
@@ -45,15 +45,20 @@ namespace LemonadeStand
                 {
                     case "7":
                         isInputValid = true;
+                        Console.Clear();
                         return gameChoice;
                     case "14":
                         isInputValid = true;
+                        Console.Clear();
                         return gameChoice;
                     case "21":
                         isInputValid = true;
+                        Console.Clear();
                         return gameChoice;
                     default:
                         Console.WriteLine("Invalid Input, Try again.");
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                 }
             }
@@ -65,7 +70,7 @@ namespace LemonadeStand
             int result = Convert.ToInt32(ValidateGameChoice());
             if (result == 7)
             {
-                Console.WriteLine("You chose to play for 7 days");
+                Console.WriteLine("You chose to play for 7 days\n");
                 Inventory inventory1 = new Inventory();
                 Recipe recipe1 = new Recipe();
                 player1 = new Human(inventory1, recipe1);
@@ -76,7 +81,7 @@ namespace LemonadeStand
 
             else if (result == 14)
             {
-                Console.WriteLine("You chose to play for 14 days");
+                Console.WriteLine("You chose to play for 14 days\n");
                 Inventory inventory1 = new Inventory();
                 Recipe recipe1 = new Recipe();
                 player1 = new Human(inventory1, recipe1);
@@ -87,7 +92,7 @@ namespace LemonadeStand
 
             else
             {
-                Console.WriteLine("You chose to play for 21 days");
+                Console.WriteLine("You chose to play for 21 days\n");
                 Inventory inventory1 = new Inventory();
                 Recipe recipe1 = new Recipe();
                 player1 = new Human(inventory1, recipe1);

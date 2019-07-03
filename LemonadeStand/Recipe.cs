@@ -13,18 +13,22 @@ namespace LemonadeStand
         public int dailyLemons;
         public int dailySugarCups;
         public int dailyIceCubes;
+        public int pricePerCup;
 
 
         //constructor
         public Recipe()
         {
-            dailySugarCups = 4;
-            dailyLemons = 4;
-            dailySugarCups = 4;
+            dailySugarCups = 0;
+            dailyLemons = 0;
+            dailySugarCups = 0;
             dailyIceCubes = 0;
+            pricePerCup = 25;
         }
 
 
         //member methods
+
+
     }
 }
