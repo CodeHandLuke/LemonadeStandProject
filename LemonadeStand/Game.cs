@@ -90,5 +90,10 @@ namespace LemonadeStand
         {
             Console.WriteLine($"\nPlayer Funds: ${player1.totalMoney}\n");
         }
+
+        public void RunGame()
+        {
+
+        }
     }
 }
