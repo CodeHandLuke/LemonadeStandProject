@@ -56,8 +56,10 @@ namespace LemonadeStand
             numberOfCustomers = rng.Next(60, 100);
             for (int index = 0; index < numberOfCustomers; index++)
             {
+
                 potentialCustomers.Add(new BaseCustomer(this.rng));
                 //Console.WriteLine(potentialCustomers[index].name); TESTING CODE
+                
             }        
         }
 
@@ -67,9 +69,33 @@ namespace LemonadeStand
             Console.WriteLine($"Today's Forecast: {dailyForecast}\nToday's High Temperature: {dailyTemp}");
         }
 
-        public void BuyLemonade()
+        //public void BuyLemonade()
+        //{
+        //    //if(WillBuy)
+        //    foreach (var customer in potentialCustomers)
+        //    {
+                
+        //    }
+        //}
+
+        public void BuyLemonade(Player player)
         {
-            
-        }
+            //formula to determine whether customer will buy lemonade
+            //if thirslevel is above 75
+
+            for (int i = 0; i < potentialCustomers.Count; i++)
+            {
+                bool bought = potentialCustomers[i].WillBuy(player, dailyForecast, dailyTemp); //buylogic method in Cust. class
+                if (bought)
+                {
+                    Console.WriteLine($"Someone bought a cup of lemonad!!");
+                    player.totalMoney += player.recipe.pricePerCup;
+                }
+                
+
+            }
+
+
+            }
     }
 }
