@@ -14,7 +14,7 @@ namespace LemonadeStand
         //constructors
         public Store(Day newDay)
         {
-            newDay.DisplayWeather();
+            
         }
 
 
@@ -46,39 +46,40 @@ namespace LemonadeStand
             if (player.totalMoney > 0)
             {
                 DisplayInventory(player);
-                Console.WriteLine($"You can choose which items you want to restock and/or set the recipe by typing in the corresponding number...\n1: Paper cups\n2: Lemons\n3: Cups of sugar\n4: Ice cubes\n5: Set the daily recipe\n");
+                Console.WriteLine($"You can choose which items you want to restock and/or set the recipe by typing in the corresponding number...\n1: Paper cups\n2: Lemons\n3: Cups of sugar\n4: Ice cubes\n5: Return to main menu\n");
                 int result = Convert.ToInt32(UserInterface.ChooseRestockChoice());
-                if (result == 1)
+                while (result != 5)
                 {
-                    PurchasePaperCups(player, newDay, newStore);
-                }
+                    if (result == 1)
+                    {
+                        PurchasePaperCups(player, newDay, newStore);
+                    }
 
-                else if (result == 2)
-                {
-                    PurchaseLemons(player, newDay, newStore);
-                }
+                    else if (result == 2)
+                    {
+                        PurchaseLemons(player, newDay, newStore);
+                    }
 
-                else if (result == 3)
-                {
-                    PurchaseSugarCups(player, newDay, newStore);
-                }
+                    else if (result == 3)
+                    {
+                        PurchaseSugarCups(player, newDay, newStore);
+                    }
 
-                else if (result == 4)
-                {
-                    PurchaseIceCubes(player, newDay, newStore);
-                }
-
-                else if (result == 5)
-                {
-                    Console.Clear();
-                    player.SetRecipe(player, newDay, newStore);//change to branching options of player menu **CHANGE THIS**
+                    else if (result == 4)
+                    {
+                        PurchaseIceCubes(player, newDay, newStore);
+                    }
+                    newDay.DisplayWeather();
+                    DisplayInventory(player);
+                    Console.WriteLine($"You can choose which items you want to restock and/or set the recipe by typing in the corresponding number...\n1: Paper cups\n2: Lemons\n3: Cups of sugar\n4: Ice cubes\n5: Return to main menu\n");
+                    result = Convert.ToInt32(UserInterface.ChooseRestockChoice());
                 }
             }
 
             else
             {
                 Console.WriteLine($"You don't have enough funds to purchase any items: ${player.totalMoney}.");
-                player.SetRecipe(player, newDay, newStore);//change to branching options of player menu **CHANGE THIS**
+                Console.ReadLine();
             }
 
         }
@@ -97,13 +98,12 @@ namespace LemonadeStand
                         player.inventory.paperCups += result;
                         player.totalMoney -= result * player.inventory.paperCupCost;
                         Console.Clear();
-                        PurchaseInventory(player, newDay, newStore);
                     }
                     else
                     {
                         Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${player.totalMoney} remaining. Press enter to continue...");
                         Console.Clear();
-                        PurchaseInventory(player, newDay, newStore);
+                        
                     }
                 }
 
@@ -112,7 +112,7 @@ namespace LemonadeStand
                     Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${player.totalMoney}. Press enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
-                    PurchaseInventory(player, newDay, newStore);
+                    
                 }
 
             }
@@ -122,7 +122,7 @@ namespace LemonadeStand
                 Console.WriteLine("Not a valid input, please type in a number, i.e. '20'. Press enter to continue...");
                 Console.ReadLine();
                 Console.Clear();
-                PurchasePaperCups(player, newDay, newStore);
+                
             }
 
         }
@@ -142,14 +142,14 @@ namespace LemonadeStand
                         player.inventory.lemons += result;
                         player.totalMoney -= result * player.inventory.lemonCost;
                         Console.Clear();
-                        PurchaseInventory(player, newDay, newStore);
+                        
                     }
                     else
                     {
                         Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${player.totalMoney}. Press enter to continue...");
                         Console.ReadLine();
                         Console.Clear();
-                        PurchaseInventory(player, newDay, newStore);
+                        
                     }
                 }
 
@@ -158,7 +158,7 @@ namespace LemonadeStand
                     Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${player.totalMoney}. Press enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
-                    PurchaseInventory(player, newDay, newStore);
+                    
                 }
 
             }
@@ -186,14 +186,14 @@ namespace LemonadeStand
                         player.inventory.sugarCups += result;
                         player.totalMoney -= result * player.inventory.sugarCupsCost;
                         Console.Clear();
-                        PurchaseInventory(player, newDay, newStore);
+                        
                     }
                     else
                     {
                         Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${player.totalMoney}. Press enter to continue...");
                         Console.ReadLine();
                         Console.Clear();
-                        PurchaseInventory(player, newDay, newStore);
+                        
                     }
                 }
 
@@ -202,7 +202,7 @@ namespace LemonadeStand
                     Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${player.totalMoney}. Press enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
-                    PurchaseInventory(player, newDay, newStore);
+                    
                 }
 
             }
@@ -229,14 +229,14 @@ namespace LemonadeStand
                         player.inventory.iceCubes += result;
                         player.totalMoney -= result * player.inventory.iceCubesCost;
                         Console.Clear();
-                        PurchaseInventory(player, newDay, newStore);
+                        
                     }
                     else
                     {
                         Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${player.totalMoney}. Press enter to continue...");
                         Console.ReadLine();
                         Console.Clear();
-                        PurchaseInventory(player, newDay, newStore);
+                        
                     }
                 }
 
@@ -245,7 +245,7 @@ namespace LemonadeStand
                     Console.WriteLine($"Sorry, you have insufficient funds to purchase this item: ${player.totalMoney}. Press enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
-                    PurchaseInventory(player, newDay, newStore);
+                    
                 }
 
             }

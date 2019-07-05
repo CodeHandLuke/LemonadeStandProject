@@ -45,6 +45,33 @@ namespace LemonadeStand
             return restockChoice;
         }
 
+        public static string ChooseMenuChoice() //This is used to validate user input for restocking inventory
+        {
+            bool chosenMenuChoice = false;
+            string MenuChoice = "";
+            while (!chosenMenuChoice)
+            {
+                MenuChoice = (Console.ReadLine());
+                Console.WriteLine("\n");
+                switch (MenuChoice)
+                {
+                    case "1":
+                        chosenMenuChoice = true;
+                        return MenuChoice;
+                    case "2":
+                        chosenMenuChoice = true;
+                        return MenuChoice;
+                    case "3":
+                        chosenMenuChoice = true;
+                        return MenuChoice;
+                    default:
+                        Console.WriteLine("Invalid input, please try again.");
+                        break;
+                }
+            }
+            return MenuChoice;
+        }
+
         public static string ChooseRecipeChoice() //This is used to validate user input for setting daily recipe
         {
             bool chosenRecipeChoice = false;

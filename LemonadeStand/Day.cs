@@ -66,5 +66,10 @@ namespace LemonadeStand
         {
             Console.WriteLine($"Today's Forecast: {dailyForecast}\nToday's High Temperature: {dailyTemp}");
         }
+
+        public void BuyLemonade()
+        {
+            
+        }
     }
 }

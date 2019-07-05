@@ -21,7 +21,7 @@ namespace LemonadeStand
 
 
         //constructors
-        public Player(Inventory inventory, Recipe recipe)
+        public Player(Inventory inventory, Recipe recipe, Day day, Store store)
         {
             totalMoney = 20;
             netGains = 0;

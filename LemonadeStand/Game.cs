@@ -47,12 +47,11 @@ namespace LemonadeStand
                 Recipe recipe1 = new Recipe();
                 Random rng = new Random();
                 Day newDay = new Day(rng);
-                player1 = new Player(inventory1, recipe1);
-                player1.InputName();
                 Store newStore = new Store(newDay);
+                player1 = new Player(inventory1, recipe1, newDay, newStore);
+                player1.InputName();
                 Console.Clear();
-                newDay.BeginDay();
-                newStore.PromptPlayerPurchase(player1, newDay, newStore); //Put this in menu options / Then RunGame here
+                RunGame(player1, inventory1, recipe1, newDay, newStore);
             }
 
             else if (result == 14)
@@ -61,9 +60,10 @@ namespace LemonadeStand
                 Console.WriteLine("You chose to play for 14 days\n");
                 Inventory inventory1 = new Inventory();
                 Recipe recipe1 = new Recipe();
+                Random rng = new Random();
                 Day newDay = new Day(rng);
                 Store newStore = new Store(newDay);
-                player1 = new Player(inventory1, recipe1);
+                player1 = new Player(inventory1, recipe1, newDay, newStore);
                 player1.InputName();
                 Console.Clear();
                 
@@ -76,9 +76,10 @@ namespace LemonadeStand
                 Console.WriteLine("You chose to play for 21 days\n");
                 Inventory inventory1 = new Inventory();
                 Recipe recipe1 = new Recipe();
+                Random rng = new Random();
                 Day newDay = new Day(rng);
                 Store newStore = new Store(newDay);
-                player1 = new Player(inventory1, recipe1);
+                player1 = new Player(inventory1, recipe1, newDay, newStore);
                 player1.InputName();
                 Console.Clear();
                 
@@ -91,9 +92,37 @@ namespace LemonadeStand
             Console.WriteLine($"\nPlayer Funds: ${player1.totalMoney}\n");
         }
 
-        public void RunGame()
+        public void RunGame(Player player, Inventory inventory, Recipe recipe, Day newDay, Store newStore)
         {
+            //Run a loop here.
+            newDay.BeginDay();
+            MainMenu(player, newDay, newStore);
+        }
+
+        public void MainMenu(Player player, Day newDay, Store newStore)
+        {
+            Console.WriteLine($"You can navigate from this screen by typing in the corresponding number...\n1: Go to Store\n2: Set Recipe\n3: Run your Lemonade Stand!\n");
+            int result = Convert.ToInt32(UserInterface.ChooseMenuChoice());
+            while (result!= 3)
+            {
+                if (result == 1)
+                {
+                    Console.Clear();
+                    newStore.PurchaseInventory(player, newDay, newStore);
+                }
+
+                else if (result == 2)
+                {
+                    Console.Clear();
+                    player.SetRecipe(player, newDay, newStore);
+                }
+                Console.Clear();
+                Console.WriteLine($"You can navigate from this screen by typing in the corresponding number...\n1: Go to Store\n2: Set Recipe\n3: Run your Lemonade Stand!\n");
+                result = Convert.ToInt32(UserInterface.ChooseMenuChoice());
+            }
+                
 
         }
+
     }
 }
