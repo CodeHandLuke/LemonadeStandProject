@@ -11,6 +11,7 @@ namespace LemonadeStand
         //member variables
         public Player player1;
         public int gameLength;
+        public Random rng;
 
 
         //constructors
@@ -33,7 +34,7 @@ namespace LemonadeStand
             InitializeGame();
         }
 
-       
+
 
         public void InitializeGame()
         {
@@ -44,11 +45,14 @@ namespace LemonadeStand
                 Console.WriteLine("You chose to play for 7 days\n");
                 Inventory inventory1 = new Inventory();
                 Recipe recipe1 = new Recipe();
-                Day newDay = new Day();
+                Random rng = new Random();
+                Day newDay = new Day(rng);
                 player1 = new Player(inventory1, recipe1);
                 player1.InputName();
+                Store newStore = new Store(newDay);
                 Console.Clear();
-                newDay.BeginDay(player1, gameLength);
+                newDay.BeginDay();
+                newStore.PromptPlayerPurchase(player1, newDay, newStore); //Put this in menu options / Then RunGame here
             }
 
             else if (result == 14)
@@ -57,11 +61,13 @@ namespace LemonadeStand
                 Console.WriteLine("You chose to play for 14 days\n");
                 Inventory inventory1 = new Inventory();
                 Recipe recipe1 = new Recipe();
-                Day newDay = new Day();
+                Day newDay = new Day(rng);
+                Store newStore = new Store(newDay);
                 player1 = new Player(inventory1, recipe1);
                 player1.InputName();
                 Console.Clear();
-                newDay.BeginDay(player1, gameLength);
+                
+
             }
 
             else
@@ -70,11 +76,13 @@ namespace LemonadeStand
                 Console.WriteLine("You chose to play for 21 days\n");
                 Inventory inventory1 = new Inventory();
                 Recipe recipe1 = new Recipe();
-                Day newDay = new Day();
+                Day newDay = new Day(rng);
+                Store newStore = new Store(newDay);
                 player1 = new Player(inventory1, recipe1);
                 player1.InputName();
                 Console.Clear();
-                newDay.BeginDay(player1, gameLength);
+                
+
             }
         }
 

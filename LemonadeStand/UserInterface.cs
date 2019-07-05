@@ -8,7 +8,7 @@ namespace LemonadeStand
 {
     public static class UserInterface
     {
-        //member variables (try to refrain from making static variables
+        //member variables (try to refrain from making static variables)
 
 
         //member methods
@@ -70,6 +70,9 @@ namespace LemonadeStand
                     case "5":
                         chosenRecipeChoice = true;
                         return recipeChoice;
+                    case "6":
+                        chosenRecipeChoice = true;
+                        return recipeChoice;
                     default:
                         Console.WriteLine("Invalid input, please try again.");
                         break;
@@ -110,4 +113,4 @@ namespace LemonadeStand
             return gameChoice;
         }
     }
-}
+    }
