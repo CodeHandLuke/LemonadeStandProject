@@ -95,16 +95,27 @@ namespace LemonadeStand
 
         public void RunGame(Player player, Inventory inventory, Recipe recipe, Day newDay, Store newStore)
         {
-            //Run a loop here.
-            newDay.BeginDay();
-            MainMenu(player, newDay, newStore);
+            currentDay = 1;
+            while (currentDay <= gameLength)
+            {
+                newDay.BeginDay();
+                MainMenu(player, newDay, newStore);
+                player.FillPitcher();
+                newDay.SellLemonade(player, newDay, newStore);
+                player.profits = 0;
+                Console.Clear();
+                currentDay++;
+            }
+
+
         }
 
         public void MainMenu(Player player, Day newDay, Store newStore)
         {
+            Console.WriteLine($"Day: {currentDay}");
             Console.WriteLine($"You can navigate from this screen by typing in the corresponding number...\n1: Go to Store\n2: Set Recipe\n3: Run your Lemonade Stand!\n");
             int result = Convert.ToInt32(UserInterface.ChooseMenuChoice());
-            while (result == 1 || result == 2 || result == 3)
+            while (result !=3)
             {
                 if (result == 1)
                 {
@@ -121,9 +132,6 @@ namespace LemonadeStand
                 else if (result == 3)
                 {
                     Console.Clear();
-                    player.FillPitcher();
-                    newDay.SellLemonade(player, newDay, newStore);
-                    Console.ReadLine();
                 }
                 Console.Clear();
                 Console.WriteLine($"You can navigate from this screen by typing in the corresponding number...\n1: Go to Store\n2: Set Recipe\n3: Run your Lemonade Stand!\n");

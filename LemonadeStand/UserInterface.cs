@@ -97,9 +97,6 @@ namespace LemonadeStand
                     case "5":
                         chosenRecipeChoice = true;
                         return recipeChoice;
-                    case "6":
-                        chosenRecipeChoice = true;
-                        return recipeChoice;
                     default:
                         Console.WriteLine("Invalid input, please try again.");
                         break;

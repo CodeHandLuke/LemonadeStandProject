@@ -11,6 +11,7 @@ namespace LemonadeStand
         //member variables
         public string name;
         public double totalMoney;
+        public double profits;
         public double netGains;
         public double netProfit;
         public double netLoss;
@@ -27,6 +28,7 @@ namespace LemonadeStand
             netGains = 0;
             netProfit = 0;
             netLoss = 0;
+            profits = 0;
             this.inventory = inventory;
             this.recipe = recipe;
 
@@ -74,7 +76,7 @@ namespace LemonadeStand
             newDay.DisplayWeather();
             DisplayRecipe();
             Console.WriteLine("Here you can set the recipe for your lemonade, a base recipe would be 4 of each. You can stay with the basic recipe, however, try to set your recipe based on the weather and conditions. The more or less of an ingredient used can affect demand.\nYou can also change the price per cup but try to adjust it based on weather conditions.\n");
-            Console.WriteLine($"You can choose which item you want to adjust by typing in the corresponding number...\n1: Lemons per Pitcher\n2: Sugar per Pitcher\n3: Ice per Cup\n4: Set the price per Cup\n5: Return to the Store.\n6: Start the game!");
+            Console.WriteLine($"You can choose which item you want to adjust by typing in the corresponding number...\n1: Lemons per Pitcher\n2: Sugar per Pitcher\n3: Ice per Cup\n4: Set the price per Cup\n5: Return to the Store.");
             int result = Convert.ToInt32(UserInterface.ChooseRecipeChoice());
             if (result == 1)
             {
@@ -102,12 +104,6 @@ namespace LemonadeStand
                 Console.Clear();
                 newStore.PromptPlayerPurchase(player, newDay, newStore);
             }
-
-            else if (result == 6)
-            {
-                return;
-            }
-
         }
         public void SetLemonsRecipe(Player player, Day newDay, Store newStore)
         {
@@ -202,7 +198,7 @@ namespace LemonadeStand
 
              else
             {
-                Console.WriteLine("Sorry, you have sold out!");
+                Console.WriteLine("Sorry, you do not have enough ingredients to refill your pitcher!");
             }
         }
 
@@ -212,6 +208,19 @@ namespace LemonadeStand
             inventory.lemons -= recipe.dailyLemons;
             inventory.sugarCups -= recipe.dailySugarCups;
             inventory.sugarCups -= recipe.cupsPerPitcher;
+        }
+
+        public bool CheckPitcher()
+        {
+            if (recipe.pitcher < 1)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
         }
     }
 }

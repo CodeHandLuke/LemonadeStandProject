@@ -72,22 +72,35 @@ namespace LemonadeStand
         {
             int customerCount;
             customerCount = 0;
-            while (player.recipe.pitcher >= 0)
+            bool empty = player.CheckPitcher();
+            if (empty || player.inventory.iceCubes < player.recipe.dailyIceCubes)
             {
-                foreach (BaseCustomer customer in potentialCustomers)
-                {
-                    bool bought = customer.WillBuy(player, dailyForecast, dailyTemp); //buylogic method in Cust. class
-                    if (bought)
-                    {
-                        Console.WriteLine($"{customer.name} bought a cup of lemonade!!");
-                        customerCount += 1;
-                        player.totalMoney += player.recipe.pricePerCup;
-                    }
-                }
-                Console.WriteLine($"{customerCount} customers bought a cup of lemonade.\nPress enter to go to next day.");
+                Console.WriteLine("Sorry, you have sold out and/or you do not have enough ingredients. Go to the store to check your inventory!");
                 Console.ReadLine();
             }
-            Console.WriteLine($"Sorry, you have sold out of lemonade!\n{customerCount} customers bought a cup of lemonade.\nPress enter to go to next day.");
+
+            else
+            {
+                while (player.recipe.pitcher >= 1 && player.inventory.iceCubes >= player.recipe.dailyIceCubes)
+                {
+                    foreach (BaseCustomer customer in potentialCustomers)
+                    {
+                        bool bought = customer.WillBuy(player, dailyForecast, dailyTemp); //buylogic method in Cust. class
+                        if (bought)
+                        {
+                            customerCount += 1;
+                            player.recipe.pitcher -= 1;
+                            player.inventory.iceCubes -= player.recipe.dailyIceCubes;
+                            //player.totalMoney += (player.recipe.pricePerCup / 100);
+                            //player.profits += (player.recipe.pricePerCup / 100);
+                            player.totalMoney += player.recipe.pricePerCup * .01;
+                            player.profits += player.recipe.pricePerCup * .01;
+                        }
+                    }
+                }
+            }
+            Console.WriteLine($"\n{customerCount} customers bought a cup of lemonade and you made ${player.profits} in profit.\nYour total funds are now ${player.totalMoney}.\nPress enter to go to next day.");
+            player.netGains += player.profits;
             Console.ReadLine();
         }
     }
