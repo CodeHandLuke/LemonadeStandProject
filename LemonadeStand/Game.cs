@@ -13,6 +13,7 @@ namespace LemonadeStand
         public int gameLength;
         public int currentDay;
         public Random rng;
+        public List<Day> gameDays;
 
 
         //constructors
@@ -95,15 +96,31 @@ namespace LemonadeStand
 
         public void RunGame(Player player, Inventory inventory, Recipe recipe, Day newDay, Store newStore)
         {
+            //List<Day> RunDays = new List<Day>();
+
+            //for (int i = 0; i < gameLength; i++)
+            //{
+            //    Day day = new Day(rng);
+            //    RunDays.Add(day);
+            //}
+
+
+            ///////////
+
+            //for (int i = 0; i < 7; i++)
+            //{
+            //    RunDays[i].BeginDay();
+            //}
+            //RunDays[5]
             currentDay = 1;
-            while (currentDay <= gameLength)
+            while (currentDay <= gameLength) //the logic in here would be in the day class in the RunDay method
             {
                 newDay.BeginDay();
                 MainMenu(player, newDay, newStore);
-                player.FillPitcher();
-                newDay.CheckLemonade(player, newDay, newStore);
                 newDay.SellLemonade(player, newDay, newStore);
+                newDay.DisplayEarnings(player);
                 DisplayProfits(player);
+                recipe.pitcher = 0;
                 player.profits = 0;
                 Console.Clear();
                 currentDay++;

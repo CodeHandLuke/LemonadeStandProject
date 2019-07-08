@@ -9,7 +9,6 @@ namespace LemonadeStand
     public class BaseCustomer
     {
         //member variables
-        //Customer will have these variables: name; thirstLevel; frugal (bool);
         public string name;
         public int thirstLevel;
         public bool frugal;

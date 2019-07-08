@@ -13,6 +13,7 @@ namespace LemonadeStand
         public int dailyTemp;
         public List<BaseCustomer> potentialCustomers;
         private Random rng;
+        public int customerCount;
 
         //Use the day class to generate the weather and also generate the randomized customer, possibly from a list or an array
         //In the game class create an array of Days
@@ -23,7 +24,6 @@ namespace LemonadeStand
         //constructors
         public Day(Random rng)
         {
-            potentialCustomers = new List<BaseCustomer>();
             this.rng = rng;
         }
 
@@ -46,59 +46,81 @@ namespace LemonadeStand
         {
             GetDailyForecast();
             GetDailyTemp();
-            //GenerateCustomer();
+            GenerateCustomer();
         }
 
         public void GenerateCustomer()
         {
+            potentialCustomers = new List<BaseCustomer>();
             int numberOfCustomers;
-            numberOfCustomers = rng.Next(75, 100);
+            numberOfCustomers = rng.Next(50, 100);
             for (int index = 0; index < numberOfCustomers; index++)
             {
-
-                potentialCustomers.Add(new BaseCustomer(this.rng));
-                //Console.WriteLine(potentialCustomers[index].name); TESTING CODE
-                
+                potentialCustomers.Add(new BaseCustomer(this.rng));                
             }        
         }
-
 
         public void DisplayWeather()
         {
             Console.WriteLine($"Today's Forecast: {dailyForecast}\nToday's High Temperature: {dailyTemp}");
         }
 
-        public void CheckLemonade(Player player, Day newDay, Store newStore)
+        public void SellLemonade(Player player, Day newDay, Store newStore)
         {
-            bool empty = player.CheckPitcher();
-            if (empty)
+            customerCount = 0;
+            bool refillPitcher;
+            refillPitcher = player.FillPitcher();
+            if (refillPitcher)
             {
-                Console.WriteLine("Sorry, you have sold out and/or you do not have enough ingredients. Go to the store to check your inventory!");
-                Console.ReadLine();
+                player.RefillPitcher();
+            }
+
+            else
+            {
+                Console.WriteLine("TEST DAY Sorry, you do not have enough ingredients to refill your pitcher!");
+            }
+
+            foreach (BaseCustomer customer in potentialCustomers)
+            {
+                bool bought = customer.WillBuy(player, dailyForecast, dailyTemp);
+                if (player.recipe.pitcher <= 0)
+                {
+                    if (player.FillPitcher())
+                    {
+                        player.RefillPitcher();
+                        if (bought)
+                        {
+                            customerCount += 1;
+                            player.recipe.pitcher -= 1;
+                            player.inventory.iceCubes -= player.recipe.dailyIceCubes;
+                            player.totalMoney += player.recipe.pricePerCup * .01;
+                            player.profits += player.recipe.pricePerCup * .01;
+                        }
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("You have sold out of lemonade!");
+                        break;
+                    }
+                }
+
+                else
+                {
+                    if (bought)
+                    {
+                        customerCount += 1;
+                        player.recipe.pitcher -= 1;
+                        player.inventory.iceCubes -= player.recipe.dailyIceCubes;
+                        player.totalMoney += player.recipe.pricePerCup * .01;
+                        player.profits += player.recipe.pricePerCup * .01;
+                    }
+                }
             }
         }
 
-        public void SellLemonade(Player player, Day newDay, Store newStore)
+        public void DisplayEarnings(Player player)
         {
-            GenerateCustomer();
-            int customerCount;
-            customerCount = 0;
-                    foreach (BaseCustomer customer in potentialCustomers)
-                    {
-                        if (player.recipe.pitcher >= 1 && player.inventory.iceCubes >= player.recipe.dailyIceCubes)
-                        {
-                            bool bought = customer.WillBuy(player, dailyForecast, dailyTemp); //buylogic method in Cust. class
-                            if (bought)
-                            {
-                                customerCount += 1;
-                                player.recipe.pitcher -= 1;
-                                player.inventory.iceCubes -= player.recipe.dailyIceCubes;
-                                player.totalMoney += player.recipe.pricePerCup * .01;
-                                player.profits += player.recipe.pricePerCup * .01;
-                            }
-                        }
-
-                    }
             Console.WriteLine($"\n{customerCount} customers bought a cup of lemonade and you made ${player.profits} in profit for the day.\nPress enter to see your net gains for the week.");
             Console.ReadLine();
         }

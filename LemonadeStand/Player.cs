@@ -189,16 +189,17 @@ namespace LemonadeStand
             }
         }
 
-        public void FillPitcher()
+        public bool FillPitcher()
         {
              if (inventory.lemons >= recipe.dailyLemons && inventory.sugarCups >= recipe.dailySugarCups && inventory.paperCups >= recipe.cupsPerPitcher)
             {
-                RefillPitcher();
+                return true;
             }
 
              else
             {
                 Console.WriteLine("Sorry, you do not have enough ingredients to refill your pitcher!");
+                return false;
             }
         }
 
