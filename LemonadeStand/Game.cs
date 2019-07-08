@@ -101,7 +101,9 @@ namespace LemonadeStand
                 newDay.BeginDay();
                 MainMenu(player, newDay, newStore);
                 player.FillPitcher();
+                newDay.CheckLemonade(player, newDay, newStore);
                 newDay.SellLemonade(player, newDay, newStore);
+                DisplayProfits(player);
                 player.profits = 0;
                 Console.Clear();
                 currentDay++;
@@ -137,6 +139,13 @@ namespace LemonadeStand
                 Console.WriteLine($"You can navigate from this screen by typing in the corresponding number...\n1: Go to Store\n2: Set Recipe\n3: Run your Lemonade Stand!\n");
                 result = Convert.ToInt32(UserInterface.ChooseMenuChoice());
             }
+        }
+
+        public void DisplayProfits(Player player)
+        {
+            player.netGains += player.profits;
+            Console.WriteLine($"Your total funds are now ${player.totalMoney}.\nYour total gains for the week are ${player.netGains}\nPress enter to go to next day.");
+            Console.ReadLine();
         }
 
     }

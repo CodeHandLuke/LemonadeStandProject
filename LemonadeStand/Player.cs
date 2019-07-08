@@ -204,10 +204,10 @@ namespace LemonadeStand
 
         public void RefillPitcher()
         {
-            recipe.pitcher = 12;
+            inventory.paperCups -= 12;
             inventory.lemons -= recipe.dailyLemons;
             inventory.sugarCups -= recipe.dailySugarCups;
-            inventory.sugarCups -= recipe.cupsPerPitcher;
+            recipe.pitcher += 12;
         }
 
         public bool CheckPitcher()

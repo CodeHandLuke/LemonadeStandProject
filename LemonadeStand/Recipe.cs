@@ -24,7 +24,7 @@ namespace LemonadeStand
             dailyLemons = 4; //!!!***Change these back to 0 after testing
             dailySugarCups = 4; //!!!***Change these back to 0 after testing
             dailyIceCubes = 4; //!!!***Change these back to 0 after testing
-            pricePerCup = 25;
+            pricePerCup = 15;
             cupsPerPitcher = 12;
         }
 

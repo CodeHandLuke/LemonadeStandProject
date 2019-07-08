@@ -46,13 +46,13 @@ namespace LemonadeStand
         {
             GetDailyForecast();
             GetDailyTemp();
-            GenerateCustomer();
+            //GenerateCustomer();
         }
 
         public void GenerateCustomer()
         {
             int numberOfCustomers;
-            numberOfCustomers = rng.Next(60, 100);
+            numberOfCustomers = rng.Next(75, 100);
             for (int index = 0; index < numberOfCustomers; index++)
             {
 
@@ -68,39 +68,38 @@ namespace LemonadeStand
             Console.WriteLine($"Today's Forecast: {dailyForecast}\nToday's High Temperature: {dailyTemp}");
         }
 
-        public void SellLemonade(Player player, Day newDay, Store newStore)
+        public void CheckLemonade(Player player, Day newDay, Store newStore)
         {
-            int customerCount;
-            customerCount = 0;
             bool empty = player.CheckPitcher();
-            if (empty || player.inventory.iceCubes < player.recipe.dailyIceCubes)
+            if (empty)
             {
                 Console.WriteLine("Sorry, you have sold out and/or you do not have enough ingredients. Go to the store to check your inventory!");
                 Console.ReadLine();
             }
+        }
 
-            else
-            {
-                while (player.recipe.pitcher >= 1 && player.inventory.iceCubes >= player.recipe.dailyIceCubes)
-                {
+        public void SellLemonade(Player player, Day newDay, Store newStore)
+        {
+            GenerateCustomer();
+            int customerCount;
+            customerCount = 0;
                     foreach (BaseCustomer customer in potentialCustomers)
                     {
-                        bool bought = customer.WillBuy(player, dailyForecast, dailyTemp); //buylogic method in Cust. class
-                        if (bought)
+                        if (player.recipe.pitcher >= 1 && player.inventory.iceCubes >= player.recipe.dailyIceCubes)
                         {
-                            customerCount += 1;
-                            player.recipe.pitcher -= 1;
-                            player.inventory.iceCubes -= player.recipe.dailyIceCubes;
-                            //player.totalMoney += (player.recipe.pricePerCup / 100);
-                            //player.profits += (player.recipe.pricePerCup / 100);
-                            player.totalMoney += player.recipe.pricePerCup * .01;
-                            player.profits += player.recipe.pricePerCup * .01;
+                            bool bought = customer.WillBuy(player, dailyForecast, dailyTemp); //buylogic method in Cust. class
+                            if (bought)
+                            {
+                                customerCount += 1;
+                                player.recipe.pitcher -= 1;
+                                player.inventory.iceCubes -= player.recipe.dailyIceCubes;
+                                player.totalMoney += player.recipe.pricePerCup * .01;
+                                player.profits += player.recipe.pricePerCup * .01;
+                            }
                         }
+
                     }
-                }
-            }
-            Console.WriteLine($"\n{customerCount} customers bought a cup of lemonade and you made ${player.profits} in profit.\nYour total funds are now ${player.totalMoney}.\nPress enter to go to next day.");
-            player.netGains += player.profits;
+            Console.WriteLine($"\n{customerCount} customers bought a cup of lemonade and you made ${player.profits} in profit for the day.\nPress enter to see your net gains for the week.");
             Console.ReadLine();
         }
     }
