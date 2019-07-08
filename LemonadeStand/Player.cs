@@ -73,8 +73,7 @@ namespace LemonadeStand
         {
             newDay.DisplayWeather();
             DisplayRecipe();
-            Console.WriteLine("Here you can set the recipe for your lemonade, a base recipe would be 4 of each. You can stay with the basic recipe, however, try to set your recipe based on the weather and conditions. The more or less of an ingredient used can affect demand.\nYou can also change the price per cup but try to adjust it based on weather conditions.\nPress enter to continue...\n");
-            Console.ReadLine();
+            Console.WriteLine("Here you can set the recipe for your lemonade, a base recipe would be 4 of each. You can stay with the basic recipe, however, try to set your recipe based on the weather and conditions. The more or less of an ingredient used can affect demand.\nYou can also change the price per cup but try to adjust it based on weather conditions.\n");
             Console.WriteLine($"You can choose which item you want to adjust by typing in the corresponding number...\n1: Lemons per Pitcher\n2: Sugar per Pitcher\n3: Ice per Cup\n4: Set the price per Cup\n5: Return to the Store.\n6: Start the game!");
             int result = Convert.ToInt32(UserInterface.ChooseRecipeChoice());
             if (result == 1)
@@ -192,6 +191,27 @@ namespace LemonadeStand
                 Console.Clear();
                 SetIceRecipe(player, newDay, newStore);
             }
+        }
+
+        public void FillPitcher()
+        {
+             if (inventory.lemons >= recipe.dailyLemons && inventory.sugarCups >= recipe.dailySugarCups && inventory.paperCups >= recipe.cupsPerPitcher)
+            {
+                RefillPitcher();
+            }
+
+             else
+            {
+                Console.WriteLine("Sorry, you have sold out!");
+            }
+        }
+
+        public void RefillPitcher()
+        {
+            recipe.pitcher = 12;
+            inventory.lemons -= recipe.dailyLemons;
+            inventory.sugarCups -= recipe.dailySugarCups;
+            inventory.sugarCups -= recipe.cupsPerPitcher;
         }
     }
 }

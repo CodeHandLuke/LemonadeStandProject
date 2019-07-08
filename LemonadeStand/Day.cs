@@ -9,7 +9,6 @@ namespace LemonadeStand
     public class Day
     {
         //member variables
-        public int currentDay;
         public string dailyForecast;
         public int dailyTemp;
         public List<BaseCustomer> potentialCustomers;
@@ -69,33 +68,27 @@ namespace LemonadeStand
             Console.WriteLine($"Today's Forecast: {dailyForecast}\nToday's High Temperature: {dailyTemp}");
         }
 
-        //public void BuyLemonade()
-        //{
-        //    //if(WillBuy)
-        //    foreach (var customer in potentialCustomers)
-        //    {
-                
-        //    }
-        //}
-
-        public void BuyLemonade(Player player)
+        public void SellLemonade(Player player, Day newDay, Store newStore)
         {
-            //formula to determine whether customer will buy lemonade
-            //if thirslevel is above 75
-
-            for (int i = 0; i < potentialCustomers.Count; i++)
+            int customerCount;
+            customerCount = 0;
+            while (player.recipe.pitcher >= 0)
             {
-                bool bought = potentialCustomers[i].WillBuy(player, dailyForecast, dailyTemp); //buylogic method in Cust. class
-                if (bought)
+                foreach (BaseCustomer customer in potentialCustomers)
                 {
-                    Console.WriteLine($"Someone bought a cup of lemonad!!");
-                    player.totalMoney += player.recipe.pricePerCup;
+                    bool bought = customer.WillBuy(player, dailyForecast, dailyTemp); //buylogic method in Cust. class
+                    if (bought)
+                    {
+                        Console.WriteLine($"{customer.name} bought a cup of lemonade!!");
+                        customerCount += 1;
+                        player.totalMoney += player.recipe.pricePerCup;
+                    }
                 }
-                
-
+                Console.WriteLine($"{customerCount} customers bought a cup of lemonade.\nPress enter to go to next day.");
+                Console.ReadLine();
             }
-
-
-            }
+            Console.WriteLine($"Sorry, you have sold out of lemonade!\n{customerCount} customers bought a cup of lemonade.\nPress enter to go to next day.");
+            Console.ReadLine();
+        }
     }
 }

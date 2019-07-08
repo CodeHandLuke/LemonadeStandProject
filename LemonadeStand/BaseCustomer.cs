@@ -21,7 +21,7 @@ namespace LemonadeStand
             string[] names = { "Adam", "Brittany", "Chris", "Deziree", "Eric", "Felicia", "Gary", "Helen", "Isaac", "Jackie", "Luke" };
             int index = rng.Next(0, names.Length);
             name = names[index];
-            thirstLevel = rng.Next(0, 11);
+            thirstLevel = rng.Next(3, 11);
             frugal = Convert.ToBoolean(rng.Next(0, 2));
         }
 
@@ -32,7 +32,7 @@ namespace LemonadeStand
             if (forecast == "sunny" || forecast == "hazy" && highTemperature > 75 && player.recipe.dailyIceCubes >= 5)
             {
                 thirstLevel += 4;
-                while (frugal == true)
+                if (frugal == true)
                 {
                     if (player.recipe.pricePerCup > 45)
                     {
@@ -44,7 +44,7 @@ namespace LemonadeStand
             else if (forecast == "sunny" || forecast == "hazy" && highTemperature > 75)
             {
                 thirstLevel += 3;
-                while (frugal == true)
+                if (frugal == true)
                 {
                     if (player.recipe.pricePerCup > 37)
                     {
@@ -56,7 +56,7 @@ namespace LemonadeStand
             else if (forecast == "sunny" || forecast == "hazy" && highTemperature < 75)
             {
                 thirstLevel += 2;
-                while (frugal == true)
+                if (frugal == true)
                 {
                     if (player.recipe.pricePerCup > 30)
                     {
@@ -68,7 +68,7 @@ namespace LemonadeStand
             else if (forecast == "cloudy" || forecast == "rainy" && highTemperature > 70)
             {
                 thirstLevel += 1;
-                while (frugal == true)
+                if (frugal == true)
                 {
                     if (player.recipe.pricePerCup > 20)
                     {
@@ -77,10 +77,10 @@ namespace LemonadeStand
                 }
             }
 
-            else if (forecast == "cloudy" || forecast == "rainy" && highTemperature < 65)
+            else if (forecast == "cloudy" || forecast == "rainy" && highTemperature < 70)
             {
                 thirstLevel -= 1;
-                while (frugal == true)
+                if (frugal == true)
                 {
                     if (player.recipe.pricePerCup > 15)
                     {

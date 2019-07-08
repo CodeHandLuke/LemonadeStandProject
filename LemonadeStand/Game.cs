@@ -11,6 +11,7 @@ namespace LemonadeStand
         //member variables
         public Player player1;
         public int gameLength;
+        public int currentDay;
         public Random rng;
 
 
@@ -103,7 +104,7 @@ namespace LemonadeStand
         {
             Console.WriteLine($"You can navigate from this screen by typing in the corresponding number...\n1: Go to Store\n2: Set Recipe\n3: Run your Lemonade Stand!\n");
             int result = Convert.ToInt32(UserInterface.ChooseMenuChoice());
-            while (result!= 3)
+            while (result == 1 || result == 2 || result == 3)
             {
                 if (result == 1)
                 {
@@ -116,12 +117,18 @@ namespace LemonadeStand
                     Console.Clear();
                     player.SetRecipe(player, newDay, newStore);
                 }
+
+                else if (result == 3)
+                {
+                    Console.Clear();
+                    player.FillPitcher();
+                    newDay.SellLemonade(player, newDay, newStore);
+                    Console.ReadLine();
+                }
                 Console.Clear();
                 Console.WriteLine($"You can navigate from this screen by typing in the corresponding number...\n1: Go to Store\n2: Set Recipe\n3: Run your Lemonade Stand!\n");
                 result = Convert.ToInt32(UserInterface.ChooseMenuChoice());
             }
-                
-
         }
 
     }

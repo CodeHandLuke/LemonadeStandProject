@@ -14,6 +14,8 @@ namespace LemonadeStand
         public int dailySugarCups;
         public int dailyIceCubes;
         public int pricePerCup;
+        public int pitcher;
+        public int cupsPerPitcher;
 
 
         //constructor
@@ -24,6 +26,7 @@ namespace LemonadeStand
             dailySugarCups = 0;
             dailyIceCubes = 0;
             pricePerCup = 25;
+            cupsPerPitcher = 12;
         }
 
 
