@@ -21,12 +21,12 @@ namespace LemonadeStand
 
 
         //constructors
-        public Inventory() //!!!***Change these back to 0 after testing
+        public Inventory() 
         {
-            paperCups = 100;
-            lemons = 100;
-            sugarCups = 100;
-            iceCubes = 1000;
+            paperCups = 0;
+            lemons = 0;
+            sugarCups = 0;
+            iceCubes = 0;
         }
 
 

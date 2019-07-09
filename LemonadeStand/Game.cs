@@ -68,7 +68,8 @@ namespace LemonadeStand
                 player1 = new Player(inventory1, recipe1, newDay, newStore);
                 player1.InputName();
                 Console.Clear();
-                
+                RunGame(player1, inventory1, recipe1, newDay, newStore);
+
 
             }
 
@@ -84,19 +85,15 @@ namespace LemonadeStand
                 player1 = new Player(inventory1, recipe1, newDay, newStore);
                 player1.InputName();
                 Console.Clear();
-                
+                RunGame(player1, inventory1, recipe1, newDay, newStore);
+
 
             }
         }
 
-        public void DisplayPlayerFunds()
-        {
-            Console.WriteLine($"\nPlayer Funds: ${player1.totalMoney}\n");
-        }
-
         public void RunGame(Player player, Inventory inventory, Recipe recipe, Day newDay, Store newStore)
         {
-            //List<Day> RunDays = new List<Day>();
+            //List<Day> RunDays = new List<Day>(); //*KEEP FOR MY OWN RECORDS* Possibly a different approach of creating separate objects for days.
 
             //for (int i = 0; i < gameLength; i++)
             //{
@@ -112,8 +109,9 @@ namespace LemonadeStand
             //    RunDays[i].BeginDay();
             //}
             //RunDays[5]
+
             currentDay = 1;
-            while (currentDay <= gameLength) //the logic in here would be in the day class in the RunDay method
+            while (currentDay <= gameLength) 
             {
                 newDay.BeginDay();
                 MainMenu(player, newDay, newStore);
@@ -122,17 +120,18 @@ namespace LemonadeStand
                 DisplayProfits(player);
                 recipe.pitcher = 0;
                 player.profits = 0;
+                player.expenses = 0;
+                inventory.iceCubes = 0;
                 Console.Clear();
                 currentDay++;
             }
-
-
+            EndGame(player);
         }
 
         public void MainMenu(Player player, Day newDay, Store newStore)
         {
             Console.WriteLine($"Day: {currentDay}");
-            Console.WriteLine($"You can navigate from this screen by typing in the corresponding number...\n1: Go to Store\n2: Set Recipe\n3: Run your Lemonade Stand!\n");
+            Console.WriteLine($"You can navigate from this screen by typing in the corresponding number...\n1: Go to Store\n2: Set Recipe\n3: Run your Lemonade Stand!(make sure to restock your inventory)\n");
             int result = Convert.ToInt32(UserInterface.ChooseMenuChoice());
             while (result !=3)
             {
@@ -153,7 +152,7 @@ namespace LemonadeStand
                     Console.Clear();
                 }
                 Console.Clear();
-                Console.WriteLine($"You can navigate from this screen by typing in the corresponding number...\n1: Go to Store\n2: Set Recipe\n3: Run your Lemonade Stand!\n");
+                Console.WriteLine($"You can navigate from this screen by typing in the corresponding number...\n1: Go to Store\n2: Set Recipe\n3: Run your Lemonade Stand!(make sure to restock your inventory)\n");
                 result = Convert.ToInt32(UserInterface.ChooseMenuChoice());
             }
         }
@@ -161,9 +160,45 @@ namespace LemonadeStand
         public void DisplayProfits(Player player)
         {
             player.netGains += player.profits;
-            Console.WriteLine($"Your total funds are now ${player.totalMoney}.\nYour total gains for the week are ${player.netGains}\nPress enter to go to next day.");
+            player.netLoss += player.expenses;
+            Console.WriteLine($"Your total funds are now ${Math.Round(player.totalMoney, 2)}.\nYour total gains for the week are ${Math.Round(player.netGains, 2)} and your total expenses are ${Math.Round(player.netLoss, 2)}.\nUnfortunately, your remaining ice has melted, time to buy more!\nPress enter to go to next day.");
             Console.ReadLine();
         }
 
+        public void EndGame(Player player)
+        {
+            player.netProfit =  player.netGains - player.netLoss;
+            if (player.netProfit > 0)
+            {
+                Console.WriteLine($"You have completed the game!\nYour total net profit/loss is ${Math.Round(player.netProfit, 2)}\n\nCongratulations, you made a profit!\n\n");
+                int result = Convert.ToInt32(UserInterface.ChosenNewGame());
+                if (result == 1)
+                {
+                    Console.Clear();
+                    PlayGame();
+                }
+
+                else if (result == 2)
+                {
+                    Environment.Exit(0);
+                }
+            }
+
+            else
+            {
+                Console.WriteLine($"You have completed the game!\nYour total net profit/loss is ${Math.Round(player.netProfit, 2)}\n\nSorry, you made a loss and lost money during your endeavor. Don't sweat it, nothing ventured, nothing gained!");
+                int result = Convert.ToInt32(UserInterface.ChosenNewGame());
+                if (result == 1)
+                {
+                    Console.Clear();
+                    PlayGame();
+                }
+
+                else if (result == 2)
+                {
+                    Environment.Exit(0);
+                }
+            }
+        }
     }
 }

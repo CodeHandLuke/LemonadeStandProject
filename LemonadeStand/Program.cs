@@ -12,11 +12,6 @@ namespace LemonadeStand
         {
             Game newGame = new Game();
             newGame.PlayGame();
-            //Day newDayTest = new Day();
-            //newDayTest.BeginDay();
-
-            //WeatherTypes newWeather = new WeatherTypes();
-            //newWeather.GetDailyWeather();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace LemonadeStand
 
         public void DisplayInventory(Player player)//This is just a display of the player's inventory, from here I want to prompt the player to possibly purchase more.
         {
-            Console.WriteLine($"{player.name}'s Inventory:\nFunds: ${player.totalMoney}\nPaper Cups: {player.inventory.paperCups}\nLemons: {player.inventory.lemons}\nCups of Sugar: {player.inventory.sugarCups}\nIce Cubes: {player.inventory.iceCubes}\n\n");
+            Console.WriteLine($"{player.name}'s Inventory:\nFunds: ${Math.Round(player.totalMoney, 2)}\nPaper Cups: {player.inventory.paperCups}\nLemons: {player.inventory.lemons}\nCups of Sugar: {player.inventory.sugarCups}\nIce Cubes: {player.inventory.iceCubes}\n\n");
         }
 
         public void PromptPlayerPurchase(Player player, Day newDay, Store newStore)
@@ -97,6 +97,7 @@ namespace LemonadeStand
                     {
                         player.inventory.paperCups += result;
                         player.totalMoney -= result * player.inventory.paperCupCost;
+                        player.expenses += totalItemCost;
                         Console.Clear();
                     }
                     else
@@ -141,6 +142,7 @@ namespace LemonadeStand
                     {
                         player.inventory.lemons += result;
                         player.totalMoney -= result * player.inventory.lemonCost;
+                        player.expenses += totalItemCost;
                         Console.Clear();
                         
                     }
@@ -185,6 +187,7 @@ namespace LemonadeStand
                     {
                         player.inventory.sugarCups += result;
                         player.totalMoney -= result * player.inventory.sugarCupsCost;
+                        player.expenses += totalItemCost;
                         Console.Clear();
                         
                     }
@@ -228,6 +231,7 @@ namespace LemonadeStand
                     {
                         player.inventory.iceCubes += result;
                         player.totalMoney -= result * player.inventory.iceCubesCost;
+                        player.expenses += totalItemCost;
                         Console.Clear();
                         
                     }

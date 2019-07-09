@@ -77,7 +77,7 @@ namespace LemonadeStand
 
             else
             {
-                Console.WriteLine("TEST DAY Sorry, you do not have enough ingredients to refill your pitcher!");
+                Console.WriteLine("Sorry, you do not have enough ingredients to refill your pitcher!");
             }
 
             foreach (BaseCustomer customer in potentialCustomers)
@@ -121,7 +121,7 @@ namespace LemonadeStand
 
         public void DisplayEarnings(Player player)
         {
-            Console.WriteLine($"\n{customerCount} customers bought a cup of lemonade and you made ${player.profits} in profit for the day.\nPress enter to see your net gains for the week.");
+            Console.WriteLine($"\n{customerCount} customers bought a cup of lemonade and you made ${Math.Round(player.profits, 2)} in profit for the day.\nYour expenses for the day are ${Math.Round(player.expenses, 2)}.\nPress enter to see your net gains for the week.");
             Console.ReadLine();
         }
     }

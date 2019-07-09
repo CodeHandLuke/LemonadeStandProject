@@ -11,10 +11,11 @@ namespace LemonadeStand
         //member variables
         public string name;
         public double totalMoney;
-        public double profits;
-        public double netGains;
-        public double netProfit;
-        public double netLoss;
+        public double profits; //how much the player makes per day
+        public double expenses; //how much player spent on ingredients per day
+        public double netGains; //total profits during the game 
+        public double netProfit; //total loss or profit at the end of the game
+        public double netLoss; //total losses during the game
         public Inventory inventory;
         public Recipe recipe;
 
@@ -29,6 +30,7 @@ namespace LemonadeStand
             netProfit = 0;
             netLoss = 0;
             profits = 0;
+            expenses = 0;
             this.inventory = inventory;
             this.recipe = recipe;
 
@@ -113,7 +115,7 @@ namespace LemonadeStand
             {
                 if (inventory.lemons >= result)
                 {
-                    recipe.dailyLemons += result;
+                    recipe.dailyLemons = result;
                     Console.Clear();
                     SetRecipe(player, newDay, newStore);
                 }
@@ -141,7 +143,7 @@ namespace LemonadeStand
             {
                 if (inventory.sugarCups >= result)
                 {
-                    recipe.dailySugarCups += result;
+                    recipe.dailySugarCups = result;
                     Console.Clear();
                     SetRecipe(player, newDay, newStore); //If I use the while loop in the SetRecipe M, get rid of these loops in the helper methods
                 }
@@ -169,7 +171,7 @@ namespace LemonadeStand
             {
                 if (inventory.iceCubes >= result)
                 {
-                    recipe.dailyIceCubes += result;
+                    recipe.dailyIceCubes = result;
                     Console.Clear();
                     SetRecipe(player, newDay, newStore);
                 }

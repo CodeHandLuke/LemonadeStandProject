@@ -21,10 +21,10 @@ namespace LemonadeStand
         //constructor
         public Recipe()
         {
-            dailyLemons = 4; //!!!***Change these back to 0 after testing
-            dailySugarCups = 4; //!!!***Change these back to 0 after testing
-            dailyIceCubes = 4; //!!!***Change these back to 0 after testing
-            pricePerCup = 15;
+            dailyLemons = 0;
+            dailySugarCups = 0;
+            dailyIceCubes = 0;
+            pricePerCup = 25;
             pitcher = 0;
             cupsPerPitcher = 12;
         }

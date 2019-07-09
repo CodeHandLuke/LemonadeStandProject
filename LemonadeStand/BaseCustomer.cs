@@ -28,63 +28,106 @@ namespace LemonadeStand
 
         public void ConsumerConsideration(Player player, string forecast, int highTemperature)
         {
-            if (forecast == "sunny" || forecast == "hazy" && highTemperature > 75 && player.recipe.dailyIceCubes >= 5)
+            if (forecast == "sunny" || forecast == "hazy" && highTemperature > 75 && player.recipe.dailyIceCubes >= 6)
             {
                 thirstLevel += 4;
-                if (frugal == true)
+                if (player.recipe.pricePerCup <= 15)
+                {
+                    thirstLevel += 4;
+                }
+                else if (frugal == true)
                 {
                     if (player.recipe.pricePerCup > 45)
                     {
                         thirstLevel -= 2;
                     }
                 }
+                else if (player.recipe.dailyLemons <= 3 || player.recipe.dailySugarCups <= 3)
+                {
+                    thirstLevel -= 2;
+                }
             }
 
             else if (forecast == "sunny" || forecast == "hazy" && highTemperature > 75)
             {
                 thirstLevel += 3;
-                if (frugal == true)
+                if (player.recipe.pricePerCup <= 15)
                 {
-                    if (player.recipe.pricePerCup > 37)
+                    thirstLevel += 3;
+                }
+                else if (frugal == true)
+                {
+                    if (player.recipe.pricePerCup > 35)
                     {
                         thirstLevel -= 2;
                     }
+                }
+
+                else if (player.recipe.dailyLemons <= 3 || player.recipe.dailySugarCups <= 3)
+                {
+                    thirstLevel -= 1;
                 }
             }
 
             else if (forecast == "sunny" || forecast == "hazy" && highTemperature < 75)
             {
                 thirstLevel += 2;
-                if (frugal == true)
+                if (player.recipe.pricePerCup <= 15)
+                {
+                    thirstLevel += 3;
+                }
+                else if (frugal == true)
                 {
                     if (player.recipe.pricePerCup > 30)
                     {
                         thirstLevel -= 3;
                     }
                 }
+
+                else if (player.recipe.dailyLemons < 3 || player.recipe.dailySugarCups < 3)
+                {
+                    thirstLevel -= 2;
+                }
             }
 
             else if (forecast == "cloudy" || forecast == "rainy" && highTemperature > 70)
             {
                 thirstLevel += 1;
-                if (frugal == true)
+                if (player.recipe.pricePerCup <= 10)
+                {
+                    thirstLevel += 3;
+                }
+               else if (frugal == true)
                 {
                     if (player.recipe.pricePerCup > 20)
                     {
                         thirstLevel -= 3;
                     }
                 }
+                else if (player.recipe.dailyLemons < 3 || player.recipe.dailySugarCups < 3)
+                {
+                    thirstLevel -= 2;
+                }
             }
 
             else if (forecast == "cloudy" || forecast == "rainy" && highTemperature < 70)
             {
                 thirstLevel -= 1;
-                if (frugal == true)
+                if (player.recipe.pricePerCup <= 12)
+                {
+                    thirstLevel += 2;
+                }
+               else if (frugal == true)
                 {
                     if (player.recipe.pricePerCup > 15)
                     {
                         thirstLevel -= 4;
                     }
+                }
+
+                else if (player.recipe.dailyLemons < 3 || player.recipe.dailySugarCups < 3)
+                {
+                    thirstLevel -= 2;
                 }
             }
         }

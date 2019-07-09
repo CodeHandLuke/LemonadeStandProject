@@ -136,5 +136,38 @@ namespace LemonadeStand
             }
             return gameChoice;
         }
+
+        public static string ChosenNewGame() //this is used to validate user input to either restart game or exit app
+        {
+            bool isInputValid = false;
+            string newGameChoice = "";
+            while (!isInputValid)
+            {
+                Console.WriteLine("Press '1' to restart a new game or press '2' to exit the app.");
+                newGameChoice = Console.ReadLine();
+                switch (newGameChoice)
+                {
+                    case "1":
+                        isInputValid = true;
+                        Console.Clear();
+                        return newGameChoice;
+                    case "2":
+                        isInputValid = true;
+                        Console.Clear();
+                        return newGameChoice;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Invalid Input, Try again.");
+                        Console.ReadLine();
+                        break;
+                }
+            }
+            return newGameChoice;
+        }
+
+        //public static double MathRoundFunction()
+        //{
+
+        //}
     }
-    }
+}
